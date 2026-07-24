@@ -18,23 +18,19 @@ model CoolingPipe
     Placement(transformation(origin = {-10, -10}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
   Modelica.Blocks.Sources.Constant outer_Gc(k = 2.e5)  annotation(
     Placement(transformation(origin = {30, -10}, extent = {{-10, -10}, {10, 10}}, rotation = -0)));
-  Components.CompositeObjects.DebyeWFPipe debyeWFPipe(rout = 0.11, T_start = 0.5*(Tout + Tin), T_D = alum.T_D, effAm = alum.effAm, Mdens = alum.Mdens, kappa0 = alum.kappa0, T0 = alum.T0) annotation(
-    Placement(transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Ramp rampT(height = 73, duration = 0.5, offset = Tin, startTime = 2)  annotation(
     Placement(transformation(origin = {-110, -10}, extent = {{-10, -10}, {10, 10}})));
   Materials.Aluminum alum annotation(
     Placement(transformation(origin = {-110, 30}, extent = {{-10, -10}, {10, 10}})));
-  Components.ThermalConductors.WFcylShell wFcylShell(rb = 0.11, kappa0 = alum.kappa0, T0 = alum.T0)  annotation(
-    Placement(transformation(origin = {10, -50}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Components.Convection inner_convect2 annotation(
     Placement(transformation(origin = {-30, -50}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
   Modelica.Thermal.HeatTransfer.Components.Convection outer_convect2 annotation(
     Placement(transformation(origin = {50, -50}, extent = {{-10, -10}, {10, 10}})));
+  Components.CompositeObjects.DebyeKTpipe debyeKTpipe(rout = 0.11, T_start = 0.5*(Tin + Tout), T_D = alum.T_D, effAm = alum.effAm, Mdens = alum.Mdens, kappa0 = alum.kappa0, T0 = alum.T0)  annotation(
+    Placement(transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}})));
+  Components.ThermalConductors.KTDebCylShell kTDebCylShell(rb = 0.11, kappa0 = alum.kappa0, T0 = alum.T0, T_D = alum.T_D, effAm = alum.effAm, Mdens = alum.Mdens)  annotation(
+    Placement(transformation(origin = {10, -50}, extent = {{-10, -10}, {10, 10}})));
 equation
-  connect(debyeWFPipe.port_a, inner_convect.solid) annotation(
-    Line(points = {{0, 30}, {-20, 30}}, color = {191, 0, 0}));
-  connect(debyeWFPipe.port_b, outer_convect.solid) annotation(
-    Line(points = {{20, 30}, {40, 30}}, color = {191, 0, 0}));
   connect(rampT.y, inner_Temp.T) annotation(
     Line(points = {{-98, -10}, {-82, -10}}, color = {0, 0, 127}));
   connect(inner_Gc.y, inner_convect.Gc) annotation(
@@ -45,10 +41,6 @@ equation
     Line(points = {{-20, -10}, {-30, -10}, {-30, -40}}, color = {0, 0, 127}));
   connect(outer_Gc.y, outer_convect2.Gc) annotation(
     Line(points = {{42, -10}, {50, -10}, {50, -40}}, color = {0, 0, 127}));
-  connect(inner_convect2.solid, wFcylShell.port_a) annotation(
-    Line(points = {{-20, -50}, {0, -50}}, color = {191, 0, 0}));
-  connect(wFcylShell.port_b, outer_convect2.solid) annotation(
-    Line(points = {{20, -50}, {40, -50}}, color = {191, 0, 0}));
   connect(outer_convect.fluid, outer_Temp.port) annotation(
     Line(points = {{60, 30}, {70, 30}, {70, -10}, {80, -10}}, color = {191, 0, 0}));
   connect(outer_convect2.fluid, outer_Temp.port) annotation(
@@ -57,6 +49,14 @@ equation
     Line(points = {{-40, 30}, {-50, 30}, {-50, -10}, {-60, -10}}, color = {191, 0, 0}));
   connect(inner_convect2.fluid, inner_Temp.port) annotation(
     Line(points = {{-40, -50}, {-50, -50}, {-50, -10}, {-60, -10}}, color = {191, 0, 0}));
+  connect(inner_convect.solid, debyeKTpipe.port_a) annotation(
+    Line(points = {{-20, 30}, {0, 30}}, color = {191, 0, 0}));
+  connect(debyeKTpipe.port_b, outer_convect.solid) annotation(
+    Line(points = {{20, 30}, {40, 30}}, color = {191, 0, 0}));
+  connect(inner_convect2.solid, kTDebCylShell.port_a) annotation(
+    Line(points = {{-20, -50}, {0, -50}}, color = {191, 0, 0}));
+  connect(kTDebCylShell.port_b, outer_convect2.solid) annotation(
+    Line(points = {{20, -50}, {40, -50}}, color = {191, 0, 0}));
   annotation(preferredView = "model", 
     Diagram(coordinateSystem(extent = {{-120, 40}, {100, -60}})),
   experiment(StartTime = 0, StopTime = 8, Tolerance = 1e-06, Interval = 0.005),

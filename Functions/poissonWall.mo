@@ -16,7 +16,7 @@ algorithm
 <blockquote><pre>(Tavg,g) = ThermalMatters.Functions.<b>poissonWall</b>(Ta,Tb,A,d);</pre></blockquote>
 
 <h4>Description</h4>
-<p>Function for calculating the average temperature (T<sub>avg</sub>) and geometric conductance factor (g) based upon the solution to Poisson's (or Laplace's) Equation,&nbsp;</p><p>∇<sup>2</sup>T = 0&nbsp;</p><p>in a planar geometry:&nbsp;</p><p>T(x) = T<sub>a</sub> + (T<sub>b</sub> - T<sub>a</sub>) x / d&nbsp;</p><p>T<sub>avg</sub> = (T<sub>a</sub> + T<sub>b</sub>)/2&nbsp;</p><p>g = A/d .</p>
+<p>Function for calculating the geometric conductance factor (g) and the average temperature (T<sub>avg</sub>) based upon the lowest-order solution to Poisson's (or Laplace's) Equation,&nbsp;</p><p>∇<sup>2</sup>T = 0&nbsp;</p><p>in a planar geometry:&nbsp;</p><p>T(x) = T<sub>a</sub> + (T<sub>b</sub> - T<sub>a</sub>) x / d&nbsp;</p><p>T<sub>avg</sub> = (T<sub>a</sub> + T<sub>b</sub>)/2&nbsp;</p><p>g = A/d .</p>
 
 <p>
 For more details, see <a href=\"http://en.wikipedia.org/wiki/Poisson%27s_equation\">Wikipedia</a>.
