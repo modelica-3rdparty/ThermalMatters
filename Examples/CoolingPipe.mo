@@ -26,9 +26,9 @@ model CoolingPipe
     Placement(transformation(origin = {-30, -50}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
   Modelica.Thermal.HeatTransfer.Components.Convection outer_convect2 annotation(
     Placement(transformation(origin = {50, -50}, extent = {{-10, -10}, {10, 10}})));
-  Components.CompositeObjects.DebyeKTpipe debyeKTpipe(rout = 0.11, T_start = 0.5*(Tin + Tout), T_D = alum.T_D, effAm = alum.effAm, Mdens = alum.Mdens, kappa0 = alum.kappa0, T0 = alum.T0)  annotation(
+  Components.CompositeObjects.DebyeWFPipe debyeWFPipe(rout = 0.11, T_start = 0.5*(Tin + Tout), T_D = alum.T_D, effAm = alum.effAm, Mdens = alum.Mdens, kappa0 = alum.kappa0, T0 = alum.T0)  annotation(
     Placement(transformation(origin = {10, 30}, extent = {{-10, -10}, {10, 10}})));
-  Components.ThermalConductors.KTDebCylShell kTDebCylShell(rb = 0.11, kappa0 = alum.kappa0, T0 = alum.T0, T_D = alum.T_D, effAm = alum.effAm, Mdens = alum.Mdens)  annotation(
+  Components.ThermalConductors.WFcylShell wFcylShell(rb = 0.11, kappa0 = alum.kappa0, T0 = alum.T0)  annotation(
     Placement(transformation(origin = {10, -50}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(rampT.y, inner_Temp.T) annotation(
@@ -49,13 +49,13 @@ equation
     Line(points = {{-40, 30}, {-50, 30}, {-50, -10}, {-60, -10}}, color = {191, 0, 0}));
   connect(inner_convect2.fluid, inner_Temp.port) annotation(
     Line(points = {{-40, -50}, {-50, -50}, {-50, -10}, {-60, -10}}, color = {191, 0, 0}));
-  connect(inner_convect.solid, debyeKTpipe.port_a) annotation(
+  connect(inner_convect.solid, debyeWFPipe.port_a) annotation(
     Line(points = {{-20, 30}, {0, 30}}, color = {191, 0, 0}));
-  connect(debyeKTpipe.port_b, outer_convect.solid) annotation(
+  connect(debyeWFPipe.port_b, outer_convect.solid) annotation(
     Line(points = {{20, 30}, {40, 30}}, color = {191, 0, 0}));
-  connect(inner_convect2.solid, kTDebCylShell.port_a) annotation(
+  connect(inner_convect2.solid, wFcylShell.port_a) annotation(
     Line(points = {{-20, -50}, {0, -50}}, color = {191, 0, 0}));
-  connect(kTDebCylShell.port_b, outer_convect2.solid) annotation(
+  connect(wFcylShell.port_b, outer_convect2.solid) annotation(
     Line(points = {{20, -50}, {40, -50}}, color = {191, 0, 0}));
   annotation(preferredView = "model", 
     Diagram(coordinateSystem(extent = {{-120, 40}, {100, -60}})),
