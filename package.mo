@@ -6,7 +6,7 @@ package ThermalMatters
 
 
   annotation (
-    version="0.3.0",
+    version="0.3.1",
     uses(Modelica(version = "4.1.0")),
     Documentation(info= "<html><head></head><body><p><span style=\"font-family: 'Ubuntu Sans';\">This package is meant as an extension of MSL's Thermal library, taking into account nonlinearities in materials' thermal properties.</span></p><p>This Modelica package is free software and the use is completely at your own risk; it can be redistributed and/or modified under the terms of the GNU General Public License (GPL). For license conditions visit https://www.gnu.org/copyleft/gpl.html.</p>
 </body></html>", revisions = "<html><head></head><body><table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
