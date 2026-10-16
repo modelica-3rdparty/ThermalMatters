@@ -11,10 +11,10 @@ model CondTest
   ThermalMatters.Materials.Silver silver annotation(
     Placement(transformation(origin = {-20, -10}, extent = {{-10, -10}, {10, 10}})));
 equation
-  (e0,cp0) = ThermalMatters.Functions.debyeEoS(copper.T0,copper.T_D,copper.effAm,copper.Mdens);
-  (e,cp) = ThermalMatters.Functions.debyeEoS(T_ramp.y,copper.T_D,copper.effAm,copper.Mdens);
-  (kap_wf,sig_wf) = ThermalMatters.Functions.wfCond(T_ramp.y,copper.kappa0,copper.T0);
-  (kappa,sigma) = ThermalMatters.Functions.ktCond(T_ramp.y,copper.kappa0,copper.T0,cp/cp0);
+  (e0,cp0) = ThermalMatters.Functions.debyeEoS(silver.T0,silver.T_D,silver.effAm,silver.Mdens);
+  (e,cp) = ThermalMatters.Functions.debyeEoS(T_ramp.y,silver.T_D,silver.effAm,silver.Mdens);
+  (kap_wf,sig_wf) = ThermalMatters.Functions.wfCond(T_ramp.y,silver.kappa0,silver.T0);
+  (kappa,sigma) = ThermalMatters.Functions.ktCond(T_ramp.y,silver.kappa0,silver.T0,cp/cp0);
 annotation(
     uses(Modelica(version = "4.1.0")),
     Diagram(coordinateSystem(extent = {{-40, 20}, {40, -20}})),
