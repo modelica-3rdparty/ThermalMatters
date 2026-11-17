@@ -26,6 +26,7 @@ algorithm
   if u < 0 then
     // domain error: return debye3(0) result
     y := 1.0;
+    print("debye3 error: input u must be >= 0 ... using u=0");
   elseif u < eps then
     // small u expansion
     y := 1.0 - 3.0*u/8.0 + u*u/20.0;
@@ -48,7 +49,7 @@ algorithm
   end if;
   annotation(preferredView = "text", 
     Documentation(info = "<html><head></head><body><h4>Syntax</h4>
-<blockquote><pre>ThermalMatters.Utilities.<b>debye3</b>(u);
+<blockquote><pre>y = ThermalMatters.Utilities.<b>debye3</b>(u);
 </pre></blockquote>
 
 <h4>Description</h4>
